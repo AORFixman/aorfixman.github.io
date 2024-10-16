@@ -3,53 +3,60 @@
 // Start the session to store success messages
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "aorfixmandb";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "aorfixmandb";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Check if all required fields are set
-if (isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['service_type'], $_POST['device_type'], $_POST['issue'])) {
-    // Get data from the form
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $service_type = $_POST['service_type'];
-    $device_type = $_POST['device_type'];
-    $issue = $_POST['issue'];
-
-    // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("INSERT INTO service_orders (name, email, phone, service_type, device_type, issue, submission_date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("ssssss", $name, $email, $phone, $service_type, $device_type, $issue);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        $_SESSION['success_message'] = "Order submitted successfully.";
-        $_SESSION['name'] = $name; // Store name for confirmation message
-        $_SESSION['email'] = $email; // Store email for confirmation message
-    } else {
-        $_SESSION['error_message'] = "Error: " . $stmt->error;
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    // Close the statement and connection
-    $stmt->close();
-    $conn->close();
+    // Check if all required fields are set
+    if (isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['service_type'], $_POST['device_type'], $_POST['issue'])) {
+        // Get data from the form
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $service_type = $_POST['service_type'];
+        $device_type = $_POST['device_type'];
+        $issue = $_POST['issue'];
 
-    // Redirect to the same page to show the confirmation
-    header("Location: submit_order.php");
+        // Prepare SQL statement to prevent SQL injection
+        $stmt = $conn->prepare("INSERT INTO service_orders (name, email, phone, service_type, device_type, issue, submission_date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssss", $name, $email, $phone, $service_type, $device_type, $issue);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            $_SESSION['success_message'] = "Order submitted successfully.";
+            $_SESSION['name'] = $name; // Store name for confirmation message
+            $_SESSION['email'] = $email; // Store email for confirmation message
+        } else {
+            $_SESSION['error_message'] = "Error: " . $stmt->error;
+        }
+
+        // Close the statement and connection
+        $stmt->close();
+        $conn->close();
+
+        // Redirect to the same page to show the confirmation
+        header("Location: submit_order.php");
+        exit();
+    }
+} else {
+    // Return a 405 Method Not Allowed response for GET requests or others
+    header('HTTP/1.1 405 Method Not Allowed');
     exit();
-} elseif (isset($_SESSION['success_message']) || isset($_SESSION['error_message'])) {
-    // Do nothing here to avoid resetting messages on page refresh
 }
+
+// Display confirmation or error message in the HTML
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
