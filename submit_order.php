@@ -45,7 +45,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['service_type
 
     // Redirect to the same page to show the confirmation
     header("Location: submit_order.php");
-    exit;
+    exit();
 } elseif (isset($_SESSION['success_message']) || isset($_SESSION['error_message'])) {
     // Do nothing here to avoid resetting messages on page refresh
 }
@@ -174,21 +174,18 @@ if (isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['service_type
 </div>
     <!-- Page Header End -->
     <!-- Confirmation messages -->
-    <?php if (isset($_SESSION['success_message'])): ?>
-        <div class="confirmation-card">
-            <h2><?php echo htmlspecialchars($_SESSION['success_message']); ?></h2>
-            <p>Thank you for your order, <?php echo htmlspecialchars($_SESSION['name']); ?>!</p>
-        
-            <p>We will contact you shortly at <strong><?php echo htmlspecialchars($_SESSION['email']); ?></strong>.</p>
-            <a href="display_orders.php" class="btn-home">View Submitted Orders</a>
-        </div>
-        <?php unset($_SESSION['success_message'], $_SESSION['name'], $_SESSION['email']); ?>
-    <?php elseif (isset($_SESSION['error_message'])): ?>
-        <div class="error-message">
-            <p><?php echo htmlspecialchars($_SESSION['error_message']); ?></p>
-            <?php unset($_SESSION['error_message']); ?>
-        </div>
-    <?php endif; ?>
+    <?php 
+// Display confirmation or error message 
+if (isset($_SESSION['success_message'])) {
+    echo '<div class="confirmation-card">';
+    // Display message
+    unset($_SESSION['success_message'], $_SESSION['name'], $_SESSION['email']); // Clear messages after displaying
+} elseif (isset($_SESSION['error_message'])) {
+    echo '<div class="error-message">';
+    unset($_SESSION['error_message']); // Clear error message
+}
+?>
+
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
