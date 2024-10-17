@@ -1,4 +1,3 @@
-
 <?php
 // Start the session to store success messages
 session_start();
@@ -23,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'
     if (!empty($_POST['address'])) {
         die("Spam detected!");
     }
+
     // Get data from the form
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
@@ -31,9 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'
     $device_type = trim($_POST['device_type']);
     $issue = trim($_POST['issue']);
 
+    // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['error_message'] = "Invalid email format.";
     } else {
+        // Prepare and execute the SQL statement
         $stmt = $conn->prepare("INSERT INTO service_orders (name, email, phone, service_type, device_type, issue, submission_date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
         $stmt->bind_param("ssssss", $name, $email, $phone, $service_type, $device_type, $issue);
         
@@ -47,38 +49,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'
 
         $stmt->close();
     }
-
-    $conn->close();
-    header("Location: submit_order.php");
-    exit();
 }
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <title>AOR Fixman - Submit Order</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
-
-    <!-- Updated Font Awesome Link -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="img/favicon.ico" rel="icon">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <style>
         .confirmation-card {
@@ -103,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'
         }
     </style>
 </head>
+
 
 <body>
     <!-- Spinner Start -->
@@ -181,7 +169,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'
         <div class="confirmation-card">
             <h2><?php echo htmlspecialchars($_SESSION['success_message']); ?></h2>
             <p>Thank you for your order, <?php echo htmlspecialchars($_SESSION['name']); ?>!</p>
-        
             <p>We will contact you shortly at <strong><?php echo htmlspecialchars($_SESSION['email']); ?></strong>.</p>
             <a href="display_orders.php" class="btn-home">View Submitted Orders</a>
         </div>
