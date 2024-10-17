@@ -17,37 +17,40 @@ if ($conn->connect_error) {
 }
 
 // Check if all required fields are set
-if (isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['service_type'], $_POST['device_type'], $_POST['issue'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['service_type'], $_POST['device_type'], $_POST['issue'])) {
+    
+    // Honeypot field - hidden field to trap bots
+    if (!empty($_POST['address'])) {
+        die("Spam detected!");
+    }
     // Get data from the form
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $service_type = $_POST['service_type'];
-    $device_type = $_POST['device_type'];
-    $issue = $_POST['issue'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $service_type = trim($_POST['service_type']);
+    $device_type = trim($_POST['device_type']);
+    $issue = trim($_POST['issue']);
 
-    // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("INSERT INTO service_orders (name, email, phone, service_type, device_type, issue, submission_date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("ssssss", $name, $email, $phone, $service_type, $device_type, $issue);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        $_SESSION['success_message'] = "Order submitted successfully.";
-        $_SESSION['name'] = $name; // Store name for confirmation message
-        $_SESSION['email'] = $email; // Store email for confirmation message
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['error_message'] = "Invalid email format.";
     } else {
-        $_SESSION['error_message'] = "Error: " . $stmt->error;
+        $stmt = $conn->prepare("INSERT INTO service_orders (name, email, phone, service_type, device_type, issue, submission_date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssss", $name, $email, $phone, $service_type, $device_type, $issue);
+        
+        if ($stmt->execute()) {
+            $_SESSION['success_message'] = "Order submitted successfully.";
+            $_SESSION['name'] = $name;
+            $_SESSION['email'] = $email;
+        } else {
+            $_SESSION['error_message'] = "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
     }
 
-    // Close the statement and connection
-    $stmt->close();
     $conn->close();
-
-    // Redirect to the same page to show the confirmation
     header("Location: submit_order.php");
     exit();
-} elseif (isset($_SESSION['success_message']) || isset($_SESSION['error_message'])) {
-    // Do nothing here to avoid resetting messages on page refresh
 }
 ?>
 
