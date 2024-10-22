@@ -50,6 +50,24 @@ $result = $conn->query($sql);
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>/* Default link style */
+.nav-item.nav-link {
+    color: #000; /* Default link color */
+    padding: 10px 15px; /* Padding for links */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Active link style */
+.nav-item.nav-link.active {
+    color: #d19a6c; /* Change text color for active link to #d19a6c */
+    background-color: transparent; /* Ensure background is transparent */
+    font-weight: bold; /* Optional: make it bold for emphasis */
+}
+
+/* Remove hover background */
+.nav-item.nav-link:hover {
+    background-color: transparent; /* Maintain clear background on hover */
+}</style>
 </head>
 
 <body>
@@ -105,16 +123,6 @@ $result = $conn->query($sql);
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="service.html" class="nav-item nav-link active">Services</a>
                 <a href="project.html" class="nav-item nav-link">Projects</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu fade-up m-0">
-                        <a href="feature.html" class="dropdown-item ">Feature</a>
-                        <a href="quote.html" class="dropdown-item">Free Quote</a>
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-
-                    </div>
-                </div>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <a href="quote.html" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
@@ -130,8 +138,8 @@ $result = $conn->query($sql);
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
                 <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Customer Orders</li>
             </ol>
         </nav>
     </div>

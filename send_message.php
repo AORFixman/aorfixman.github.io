@@ -96,12 +96,12 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5" style="background-image: url('img/header.png'); background-size: cover; background-position: center;">
     <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Customer Orders</h1>
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Send Message</h1>
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Message</li>
             </ol>
         </nav>
     </div>

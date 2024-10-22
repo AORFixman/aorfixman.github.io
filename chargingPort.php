@@ -89,6 +89,25 @@
         .footer a:hover {
             text-decoration: underline;
         }
+              /* Default link style */
+.nav-item.nav-link {
+    color: #000; /* Default link color */
+    padding: 10px 15px; /* Padding for links */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Active link style */
+.nav-item.nav-link.active {
+    color: #d19a6c; /* Change text color for active link to #d19a6c */
+    background-color: transparent; /* Ensure background is transparent */
+    font-weight: bold; /* Optional: make it bold for emphasis */
+}
+
+/* Remove hover background */
+.nav-item.nav-link:hover {
+    background-color: transparent; /* Maintain clear background on hover */
+}
+
     </style>
 </head>
 
@@ -142,6 +161,7 @@
                 <a href="index.html" class="nav-item nav-link">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="service.html" class="nav-item nav-link active">Services</a>
+                <a href="project.html" class="nav-item nav-link">Projects</a>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <a href="quote.html" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
@@ -152,12 +172,11 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5" style="background-image: url('img/header.png'); background-size: cover; background-position: center;">
     <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Customer Orders</h1>
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Charging Port</h1>
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Charging Port</li>
             </ol>
         </nav>
     </div>

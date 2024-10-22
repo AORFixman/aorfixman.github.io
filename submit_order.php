@@ -88,6 +88,25 @@ $conn->close();
         .btn-home:hover {
             background-color: #45a049;
         }
+         /* Default link style */
+.nav-item.nav-link {
+    color: #000; /* Default link color */
+    padding: 10px 15px; /* Padding for links */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Active link style */
+.nav-item.nav-link.active {
+    color: #d19a6c; /* Change text color for active link to #d19a6c */
+    background-color: transparent; /* Ensure background is transparent */
+    font-weight: bold; /* Optional: make it bold for emphasis */
+}
+
+/* Remove hover background */
+.nav-item.nav-link:hover {
+    background-color: transparent; /* Maintain clear background on hover */
+}
+
     </style>
 </head>
 
@@ -153,12 +172,12 @@ $conn->close();
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5" style="background-image: url('img/header.png'); background-size: cover; background-position: center;">
     <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Customer Orders</h1>
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Submit Order</h1>
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
                 <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Submit Order</li>
             </ol>
         </nav>
     </div>
