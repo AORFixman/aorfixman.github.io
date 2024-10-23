@@ -34,6 +34,48 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* Default link style */
+.nav-item.nav-link {
+    color: #000; /* Default link color */
+    padding: 10px 15px; /* Padding for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Ensure the default weight is normal */
+}
+
+/* Active link style */
+.nav-item.nav-link.active {
+    color: #d19a6c; /* Change text color for active link to #d19a6c */
+    background-color: transparent; /* Ensure background is transparent */
+    font-weight: bold; /* Make it bold for emphasis */
+}
+
+/* Special style for 'Pages' link to be bold */
+.nav-item.dropdown .nav-link {
+    font-weight: bold; /* Bold only for the 'Pages' dropdown link */
+}
+
+/* Remove hover background */
+.nav-item.nav-link:hover {
+    background-color: transparent; /* Maintain clear background on hover */
+}
+/* Ensure consistent font styles */
+body {
+    font-family: 'Open Sans', sans-serif; /* or any other font you are using */
+}
+
+/* Main heading styles */
+h2, h3 {
+    color: #a67337; /* Same color for headings */
+}
+
+/* Bold style for active link */
+.nav-item.nav-link.active {
+    font-weight: bold; /* Make the active link bold */
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -88,7 +130,7 @@
                 <a href="index.html" class="nav-item nav-link">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="service.html" class="nav-item nav-link">Service</a>
-                <a href="project.html" class="nav-item nav-link">Project</a>
+                <a href="project.html" class="nav-item nav-link">Projects</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link active dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
@@ -151,7 +193,7 @@
                     <div class="overflow-hidden position-relative">
                         <img class="img-fluid" src="img/team_2.jpg" alt="">
                         <div class="team-social">
-                            <a class="btn btn-square" href="https://www.facebook.com/RrazakHassan?mibextid=LQQJ4d"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href="https://www.facebook.com/profile.php?id=100091800288650&mibextid=LQQJ4d"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-square" href="https://www.wasap.my/601111908274"><i class="fab fa-whatsapp"></i></a>
                             
                         </div>
